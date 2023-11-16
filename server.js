@@ -1,12 +1,21 @@
 import express from "express";
 import colors from "colors";
 import dotenv from 'dotenv';
+import morgan  from "morgan";
+import connectDB from "./config/db.js";
 
 // config env 
 dotenv.config();
 
+// connecting to database
+connectDB();
+
 // rest object
 const app = express();
+
+// middleware
+app.use(express.json());
+app.use(morgan('dev'));
 
 app.get('/', (req, res) => {
 	res.send({message:'hey Welcome to Ecommer app '})
