@@ -31,8 +31,8 @@
 }
 
 /* *************************
-    ******************
-******** footer ********************
+******** footer ************
+****************************
 */
 .footer {
   background: linear-gradient(to right, #434343 0%, black 100%) !important;
@@ -46,4 +46,39 @@
 .footer a:hover {
   padding-bottom: 5px;
   border-bottom: 2px solid white;
+}
+
+/* *************************
+******** Register ***********
+****************************
+*/
+
+.register {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 70vh;
+  flex-direction: column;
+}
+.register h1 {
+  font-family: "Playfair";
+  margin-bottom: 2rem;
+  letter-spacing: 3px;
+  /* text-transform: uppercase; */
+}
+.form-container {
+  /* width: 15rem; */
+}
+.register-form {
+  display: flex;
+  gap: 1rem;
+}
+
+.formBtn {
+  display: flex;
+  width: 100%;
+  text-align: center;
+  justify-content: center;
+  justify-self: end;
+  letter-spacing: 2px;
 }
