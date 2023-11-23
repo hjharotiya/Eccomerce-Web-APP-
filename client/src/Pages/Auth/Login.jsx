@@ -3,11 +3,13 @@ import Layout from "../../components/layout/Layout";
 import toast from "react-hot-toast";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../components/context/auth";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const [auth, setAuth] = useAuth();
 
   // form function
   const handelSubmit = async (e) => {
@@ -18,8 +20,13 @@ const Login = () => {
         password,
       });
       if (res.data.success) {
-        console.log(res.data.message);
         toast.success(res.data.message);
+        setAuth({
+          ...auth,
+          user: res.data.user,
+          token: res.data.token,
+        });
+        localStorage.setItem("auth", JSON.stringify(res.data));
         navigate("/");
       } else {
         toast.error(res.data.message);
@@ -62,7 +69,7 @@ const Login = () => {
             />
           </div>
           <button type="submit" className="formBtn btn btn-primary">
-            Submit
+            Login
           </button>
         </form>
       </div>
