@@ -1,6 +1,7 @@
 import express from "express";
 
 import {
+  forgetPasswordController,
   loginController,
   registerController,
   testController,
@@ -15,6 +16,9 @@ const router = express.Router();
 router.post("/register", registerController);
 // LOGIN || METHOD POST
 router.post("/login", loginController);
+
+// FORGET-PASSWORD || METHOD POST
+router.post("/forget-password", forgetPasswordController);
 
 // TEST routes
 router.get("/test", requireSignIn, isAdmin, testController);

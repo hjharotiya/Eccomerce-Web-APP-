@@ -60,6 +60,11 @@
   height: 70vh;
   flex-direction: column;
 }
+.register-form {
+  padding: 2rem;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border-radius: 10px;
+}
 .register h1 {
   font-family: "Playfair";
   margin-bottom: 2rem;
@@ -81,4 +86,16 @@
   justify-content: center;
   justify-self: end;
   letter-spacing: 2px;
+}
+
+/* *************************
+******** LOGIN ***********
+****************************
+*/
+
+.Login-form {
+  /* background-color: yellow; */
+  padding: 1rem;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border-radius: 5px;
 }
