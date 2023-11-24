@@ -6,6 +6,8 @@ import PageNotFound from "./Pages/PageNotFound";
 import ContactUs from "./Pages/ContactUs";
 import Register from "./Pages/Auth/Register";
 import Login from "./Pages/Auth/Login";
+import Dashboard from "./Pages/user/Dashboard";
+import PrivateRoute from "./components/routes/private";
 
 function App() {
   return (
@@ -13,6 +15,9 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/dashboard" element={<PrivateRoute />}>
+          <Route path="" element={<Dashboard />} />
+        </Route>
         <Route path="/login" element={<Login />} />
         <Route path="/about" element={<About />} />
         <Route path="/policy" element={<Policy />} />
