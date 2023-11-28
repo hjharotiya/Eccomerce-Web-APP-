@@ -5,6 +5,7 @@ import morgan from "morgan";
 import connectDB from "./config/db.js";
 import authRouter from "./routes/authRoute.js";
 import cors from "cors";
+import categoryRouter from "./routes/categoryRoute.js";
 
 // config env
 dotenv.config();
@@ -26,6 +27,7 @@ app.get("/", (req, res) => {
 
 // routes
 app.use("/api/v1/auth", authRouter);
+app.use("/api/v1/category", categoryRouter);
 
 // port
 
