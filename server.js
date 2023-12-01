@@ -6,6 +6,7 @@ import connectDB from "./config/db.js";
 import authRouter from "./routes/authRoute.js";
 import cors from "cors";
 import categoryRouter from "./routes/categoryRoute.js";
+import productRoutes from "./routes/productRoute.js";
 
 // config env
 dotenv.config();
@@ -28,6 +29,7 @@ app.get("/", (req, res) => {
 // routes
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/category", categoryRouter);
+app.use("/api/v1/product", productRoutes);
 
 // port
 
