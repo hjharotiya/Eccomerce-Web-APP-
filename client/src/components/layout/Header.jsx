@@ -2,6 +2,7 @@ import { NavLink, Link } from "react-router-dom";
 import { FiShoppingCart } from "react-icons/fi";
 import { useAuth } from "../context/auth";
 import toast from "react-hot-toast";
+import SearchInput from "../Form/SearchInput";
 
 const Header = () => {
   const [auth, setAuth] = useAuth();
@@ -37,6 +38,9 @@ const Header = () => {
           >
             <span className="navbar-toggler-icon" />
           </button>
+          <div className="">
+            <SearchInput />
+          </div>
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="ms-auto navbar-nav">
               <li className="nav-item">
