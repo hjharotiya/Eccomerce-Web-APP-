@@ -7,6 +7,9 @@ import {
   getProductPhotoController,
   getProductsController,
   getSingleProductController,
+  productCountFilter,
+  productFilterController,
+  productListController,
   updateProductController,
 } from "../controller/productController.js";
 
@@ -42,4 +45,13 @@ router.put(
   updateProductController
 );
 
+// filter product route
+router.post("/product-filters", productFilterController);
+
+// PAGE COUNT
+router.get("/product-count", productCountFilter);
+
 export default router;
+
+// PRODUCT PER PAGE
+router.get("/product-list/:page", productListController);

@@ -26,7 +26,7 @@ router.put(
 );
 
 // Get All Categories
-router.get("/get-category", requireSignIn, isAdmin, allCategoryController);
+router.get("/get-category", allCategoryController);
 
 //******** */ Single Category ********
 router.get("/get-singleCategory/:slug", singleCategoryController);
