@@ -56,15 +56,19 @@ const ProductDetails = () => {
           <h6>Name:{product?.name}</h6>
           <h6>Description:{product?.description}</h6>
           <h6>Price:{product?.price}</h6>
-          {/* <h6>Category:{product.category.name}</h6> */}
+          <h6>Category:{product?.category?.name}</h6>
           <button className="btn btn-secondary ms-1">ADD TO CART</button>
         </div>
       </div>
+      <hr />
       <div className="row">
-        <h1>Similar Products</h1>
+        <h6>Similar Products</h6>
+        {relatedProduct.length < 1 && (
+          <p className="text-center mt-3">No Similar Product Found</p>
+        )}
         <div className="d-flex flex-wrap">
           {relatedProduct.map((p) => (
-            <div className="card m-2" style={{ width: "17.5rem" }}>
+            <div key={p?._id} className="card m-2" style={{ width: "17.5rem" }}>
               <div>
                 <img
                   src={`http://localhost:8000/api/v1/product/product-photo/${p._id}`}

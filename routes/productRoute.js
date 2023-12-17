@@ -7,6 +7,7 @@ import {
   getProductPhotoController,
   getProductsController,
   getSingleProductController,
+  productCategoryController,
   productCountFilter,
   productFilterController,
   productListController,
@@ -63,3 +64,6 @@ router.get("/search/:keyword", searchProductController);
 
 // SIMILAR PRODUCT
 router.get("/similar/:pid/:cid", similarProductController);
+
+// PRODUCT BY CATEGORY
+router.get("/product-category/:slug", productCategoryController);
