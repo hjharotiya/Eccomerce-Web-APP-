@@ -267,3 +267,31 @@ export const searchProductController = async (req, res) => {
     });
   }
 };
+
+// SIMILAR PRODUCT CONTROLLER
+
+export const similarProductController = async (req, res) => {
+  try {
+    const { pid, cid } = req.params;
+    const products = await productModel
+      .find({
+        category: cid,
+        _id: { $ne: pid },
+      })
+      .select("-photo")
+      .limit(3)
+      .populate("category");
+    res.status(200).send({
+      success: "true",
+      message: "similar Product successfully fetched",
+      products,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success: false,
+      message: "Error in Getting similar Product",
+      error,
+    });
+  }
+};
