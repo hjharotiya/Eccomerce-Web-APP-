@@ -1,12 +1,20 @@
+import { useEffect, useState, useRef } from "react";
+
 import React from "react";
 import Layout from "../components/layout/Layout";
 import { useCart } from "../components/context/cart";
 import { useAuth } from "../components/context/auth";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import DropIn from "braintree-web-drop-in-react";
 
 const CartPage = () => {
+  const dropInRef = useRef(null);
   const [auth, setAuth] = useAuth();
   const [cart, setCart] = useCart();
+  const [clientToken, setClientToken] = useState("");
+  const [instanse, setInstance] = useState("");
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const totalPrice = () => {
@@ -35,6 +43,44 @@ const CartPage = () => {
       localStorage.setItem("cart", JSON.stringify(myCart));
     } catch (error) {
       console.log(error);
+    }
+  };
+
+  // GET PAYMENT GATEWAY TOKEN
+  const getToken = async () => {
+    try {
+      const { data } = await axios.get(
+        "http://localhost:8000/api/v1/product/braintree/token"
+      );
+      setClientToken(data?.clientToken);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  useEffect(() => {
+    getToken();
+  }, [auth?.token]);
+  // HANDEL PAYMENT
+  const handelPayment = async () => {
+    console.log(dropInRef);
+    try {
+      setLoading(true);
+      const { nonce } = await instanse.requestPaymentMethod();
+      const { data } = await axios.post(
+        "http://localhost:8000/api/v1/product/braintree/payment",
+        {
+          nonce,
+          cart,
+        }
+      );
+      setLoading(false);
+      localStorage.removeItem("cart");
+      setCart([]);
+      navigate("/dashboard/user/orders");
+      toast.success("Payment Completed Successfully ");
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
     }
   };
 
@@ -126,6 +172,20 @@ const CartPage = () => {
                 )}
               </div>
             )}
+            <div className="mt-2">
+              <DropIn
+                options={{
+                  authorization: clientToken,
+                  paypal: { flow: "vault" },
+                }}
+                onInstance={(instanse) => {
+                  setInstance(instanse);
+                }}
+              />
+              <button className="btn btn-primary" onClick={handelPayment}>
+                make Payment
+              </button>
+            </div>
           </div>
         </div>
       </div>

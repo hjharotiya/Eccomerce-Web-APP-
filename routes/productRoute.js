@@ -2,6 +2,8 @@ import express from "express";
 import { isAdmin, requireSignIn } from "../middlewear/authMiddlewear.js";
 import formidable from "express-formidable";
 import {
+  braintreePaymentController,
+  braintreeTokenController,
   createProductController,
   deleteProductController,
   getProductPhotoController,
@@ -15,7 +17,6 @@ import {
   similarProductController,
   updateProductController,
 } from "../controller/productController.js";
-
 const router = express.Router();
 
 // create product
@@ -67,3 +68,10 @@ router.get("/similar/:pid/:cid", similarProductController);
 
 // PRODUCT BY CATEGORY
 router.get("/product-category/:slug", productCategoryController);
+
+// PAYMENTS ROUTES
+// TOKEN
+router.get("/braintree/token", braintreeTokenController);
+
+// PAYMENT
+router.post("/braintree/token", requireSignIn, braintreePaymentController);
